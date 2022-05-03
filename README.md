@@ -1,34 +1,62 @@
-# Fullstack Coding Challenge
+## Steps to run ##
 
-## Overview ##
-The goal of this challenge is to create a NFT gallery webapp.
+In a terminal with node JS installed:
 
-## Requirements ##
-- Make sure that the webapp is performant and feels pleasant to use
-- User should be able to view all NFTs for an address (bonus points, also allow for ENS)
-- User should be able to "like" a NFT
-- User should be able to see the like count for a NFT
-- README file in the repo that answer the following questions
-  1. What is your testing strategy? (There's no need for you to add testing but feel free to if you'd like!). If manual what are the test cases, if automated how would you go about doing it?
-  2. How did you decide on how to organize and architect the webapp?
-  3. What are some design decisions that you made that we should be aware of?
-  4. What are the instructions for getting your submission running?
+<pre><code>$ cd client
+$ npm i
+$ npm run build
+$ cd ..
+$ cd server
+$ npm i
+$ npm run start</code></pre>
 
-## Notes ##
-- We use Next.js and express.js here at SZNS. Feel free to use that if you can, if not, feel free to use whatever frameworks you're comfortable with
-- No need to focus on authentication for this project (feel free to if you'd like to though!)
-- To get NFT data please do one of the following
-  1. Use alchemy NFT API
-  2. Use moralis NFT API
-  3. Use any other NFT API you can find
-  4. Feel free to mock NFT data to pass back
-- A user can like a NFT as many times as they want (since no need to focus on authentication :))
-- This is an open-ended challenge and the goal is to show off your skills and strengths. Feel free to pay attention to the areas that you want and just note that in the write up. If you want to do everything in the webapp, feel free to do so. If you'd rather create a more robust api and a simple frontend, feel free to do that as well!
-- No need to focus on deployment or anything, please just add instructions on how to run locally
-- If you have any questions , please reach out to shean@szns.io
+Go to http://localhost:1337/ in your browser.
 
-## Submission ##
-- Once received, you will have 7 days to complete this challenge.
-- Start by forking this repo and push up code as needed
-- Once you're ready to submit, please create a release tag and we will use the latest release in our review
-- Please give access to the repo to, shean@szns.io and dan@szns.io
+## Technologies used ##
+
+For the backend I’m using Express.js. I’m calling out to the Alchemy API to retrieve NFT metadata. In order to get the ENS validation working I needed to have an Ethereum provider to connect to, so I quickly setup an instance with Quicknode for easier hand-off of the code challenge. 
+
+To store the like count I am using Sqlite3 so a DB instance is quickly accessible with nothing more than an NPM install. I kept it simple and used a token + contract combination as my unique id key. That way if a token is like in one wallet and moved to another one the token’s like count is retained. 
+
+The front-end is built using Vue3. I’m using Vite to speed up my development setup and Tailwind CSS to get a quick and good looking UI.
+
+I learned through this process that IPFS provided images are tricky to work with. My code covers a good majority of different formats provided and pipes in through IPFS.io mostly to retrieve the image content. I can see how Opensea and other marketplaces have their own versions stored and cached for speed.
+
+
+## Testing strategy ##
+
+The testing strategy I would use here would be manual, and the cases I would test for are below:
+
+Happy path test:
+
+- A user can search for an ENS name and retrieve a collection.
+
+- A user can enter a wallet address and retrieve a collection.
+
+- A user can enter a valid ENS name or wallet address that does not own any NFTs and a message describing this will be present.
+
+- A user can hover under the title of the NFT to see a tooltip with more info.
+
+- A user can like an NFT from a collection.
+
+- A user can like an NFT as many times as they would like.
+
+- A user can filter NFTs by title using the search filter in the top-right corner.
+
+- A user can clear out a filter by clicking the X icon in the filter bar and expect the loaded NFT collection to be completely presented again.
+
+- A user can click the X icon in the top-most search bar to clear out the collection displayed and expect to go back to the empty state of the app.
+
+- Note: If an NFT is transferred to a different wallet, the like count will carry over.
+
+Handled errors:
+
+- A user can enter an invalid ENS name and expect an error message.
+- A user can enter an invalid wallet address and expect an error message.
+- A user can enter random text and expect an error message.
+
+## Things I would work on next ##
+
+I noticed a slight stutter when clicking the Like button, probably some weird Vue reactivity bug that time did not allow for me to get to in this build.
+
+I’d also like to change the wallet address associated with the contract if a search finds that the ownership changed. 
