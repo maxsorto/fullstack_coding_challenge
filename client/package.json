@@ -1,0 +1,41 @@
+{
+    "name": "vite-project",
+    "private": true,
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "npm run lint && vite build",
+        "preview": "vite preview",
+        "lint": "eslint --ext .js,.vue src"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.1.0",
+        "@fortawesome/free-regular-svg-icons": "^6.1.0",
+        "@fortawesome/free-solid-svg-icons": "^6.1.0",
+        "@fortawesome/vue-fontawesome": "^3.0.0-5",
+        "axios": "^0.26.1",
+        "ipfs": "^0.62.3",
+        "mitt": "^3.0.0",
+        "moment": "^2.29.1",
+        "tslib": "^2.3.1",
+        "video-snapshot": "^1.0.11",
+        "vue": "^3.2.25",
+        "vue-axios": "^3.4.1",
+        "vue-router": "^4.0.14",
+        "vuedraggable": "^4.1.0",
+        "vuex": "^4.0.2"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^2.2.0",
+        "autoprefixer": "^10.4.4",
+        "eslint": "^8.11.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-vue": "^8.5.0",
+        "postcss": "^8.4.12",
+        "prettier": "^2.6.0",
+        "sass": "^1.49.9",
+        "tailwindcss": "^3.0.23",
+        "vite": "^2.8.0"
+    }
+}
